@@ -24,14 +24,21 @@ def hello_world(request):
         {'hello_world_list':hello_world_list})
 
 
-# CRUD 중 CreateView를 통한 회원가입구현
-from django.views.generic import CreateView
+
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
+# CRUD 중 CreateView를 통한 회원가입구현
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/create.html'
+
+# CRUD 중 R(DetailView)를 이용해 개인페이지 구현
+class AccountDetailView(DetailView):
+    model = User
+    context_object_name = 'target_user'
+    template_name = 'accountapp/detail.html'
