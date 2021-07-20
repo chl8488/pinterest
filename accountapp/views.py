@@ -48,11 +48,13 @@ class AccountDetailView(DetailView):
 # CRUD 중 U(Update View) 를 이용해 비밀번호 변경 구현
 class AccountUpdateView(UpdateView):
     model = User
+    context_object_name = 'target_user'
     form_class = AccountUserUpdateForm
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
 
 class AccountDeleteView(DeleteView):
     model = User
+    context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'
