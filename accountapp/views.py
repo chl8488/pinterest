@@ -6,6 +6,7 @@ from .models import *
 
 # Create your views here.
 
+
 def hello_world(request):
     if request.method == 'POST':
         temp = request.POST.get('hello_world_input')
@@ -25,10 +26,11 @@ def hello_world(request):
 
 
 
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from .templates.accountapp.forms import AccountUserUpdateForm
 
 # CRUD 중 CreateView를 통한 회원가입구현
 class AccountCreateView(CreateView):
@@ -42,3 +44,10 @@ class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+# CRUD 중 U(Update View) 를 이용해 비밀번호 변경 구현
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = AccountUserUpdateForm
+    success_url = reverse_lazy('accountapp:hello_world')
+    template_name = 'accountapp/update.html'
