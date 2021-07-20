@@ -148,3 +148,11 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+
+# media 관련 설정
+# 주소창에 media/ 이하의 경로로 접근을해야 실제 미디어파일에 접근이 가능하다는것
+# ex) 127.0.0.1:8000/midia/~~.jpg
+MEDIA_URL = '/media/'
+# 미디어 파일을 서버에 올렸을때 어느경로에 지정이 될것인가에 대한 정보
+# 파일을 올리게 되면 pinterest 아래에 media 라는 디렉토리가 새로 생기면서 이디렉토리안에 있는 디렉토리에 우리가 올린 파일들이 저장됨
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
