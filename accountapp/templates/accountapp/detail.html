@@ -4,30 +4,38 @@
   <div>
     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
 
+      <!--포로파일이 있다면 이미지,닉네임,메시지,편집보아게-->
+      {% if target_user.profile %}
       <img src="{{ target_user.profile.image.url }}" alt=""
            style="height: 10rem; width: 10rem; border-radius: 20rem; margin-bottom: 2rem ">
 
-      {% if target_user.profile %}
       <h2 style="font-family: NanumSquareB;">
         {{ target_user.profile.nickname }}
 
+        {% if target_user == user %}
         <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
           편집
         </a>
+        {% endif %}
       </h2>
-
-      {% else %}
-      <a href="{% url 'profileapp:create' %}">
-        <p>
-          Create Profile
-        </p>
-      </a>
-      {% endif %}
-
-      <!--  대화명 출력 -->
+      <!--  대화명(메시지) 출력 -->
       <h5 style="margin-bottom:3rem;">
         {{ target_user.profile.message }}
       </h5>
+
+      {% else %}
+        {% if target_user == user %}
+        <a href="{% url 'profileapp:create' %}">
+          <h2 style="font-family: 'NanumSquareB'">
+            Create Profile
+          </h2>
+        </a>
+        {% else %}
+        <h2>
+          프로필 미설정
+        </h2>
+        {% endif %}
+      {% endif %}
 
 
       <!-- 비밀번호 변경(update)-->
