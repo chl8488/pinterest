@@ -8,6 +8,7 @@ from .decorators import account_ownership_required
 from .models import *
 
 # Create your views here.
+# accountapp 은 회원가입 로그인 회원탈퇴 로그아웃 비밀번호변경 기본페이지(hello_world)
 
 @login_required
 def hello_world(request):
