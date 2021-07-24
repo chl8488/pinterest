@@ -80,3 +80,5 @@ db.sqlite3
 main.py
 
 __pycache__/
+
+media/

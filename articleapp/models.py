@@ -6,7 +6,7 @@ from django.db import models
 class Article(models.Model):
     writer = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name='article')
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='article/')
+    image = models.ImageField(upload_to='article/',null=True,blank=True)
     content = models.TextField(null=True)
 
     created_at = models.DateField(auto_created=True, null=True)
