@@ -1,3 +1,5 @@
-<div>
-  <img src="{{ article.image.url }}" alt="">
-</div>
+{% if article.image %}
+  <div>
+    <img src="{{ article.image.url }}" alt="">
+  </div>
+{% endif %}
