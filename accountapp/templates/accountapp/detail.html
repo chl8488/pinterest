@@ -7,7 +7,8 @@
       <!--포로파일이 있다면 이미지,닉네임,메시지,편집보아게-->
       {% if target_user.profile %}
       <img src="{{ target_user.profile.image.url }}" alt=""
-           style="height: 10rem; width: 10rem; border-radius: 20rem; margin-bottom: 2rem ">
+           style="height: 10rem; width: 10rem; border-radius: 20rem; margin-bottom: 2rem;
+           object-fit: cover;">
 
       <h2 style="font-family: NanumSquareB;">
         {{ target_user.profile.nickname }}
