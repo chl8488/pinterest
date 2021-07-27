@@ -10,6 +10,6 @@ class Comment(models.Model):
                                 null=True, related_name='comment')
     writer = models.ForeignKey(User, on_delete=models.SET_NULL,
                                 null=True, related_name='comment')
-
+    image = models.ImageField(upload_to='comments/',null=True,blank=True)
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now=True)

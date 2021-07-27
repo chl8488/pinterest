@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container form_class_max_600px my-5">
+    <div class="text-center my-5">
+            <h1>댓글 수정</h1>
+    </div>
+    <div>
+        <form action="{% url 'comment:update' target_comment.pk%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-dark rounded-pill col-3 mt-3" value="수정">
+
+        </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

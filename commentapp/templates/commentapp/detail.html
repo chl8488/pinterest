@@ -9,16 +9,26 @@ border-radius: 1rem; border-color: #bbb;">
     {{ comment.created_at }}
   </div>
   <div style="margin: 1rem 0;">
+    {% if comment.image %}
+     <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"
+           src="{{comment.image.url}}" alt="">
+    {% endif %}
     {{ comment.content }}
   </div>
 
   {% if comment.writer == user %}
   <div style="text-align: right">
+    <a href="{% url 'comment:update' pk=comment.pk%}"\\
+    class="btn btn-warning rounded-pill px-4 btn-sm">
+      수정
+    </a>
     <a href="{% url 'comment:delete' pk=comment.pk%}"\\
-    class="btn btn-danger rounded-pill">
+    class="btn btn-danger rounded-pill btn-sm px-4" >
       삭제
     </a>
+  </div>
 
   </div>
   {% endif %}
+
 </div>
