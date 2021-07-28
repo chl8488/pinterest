@@ -3,7 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views.generic.list import MultipleObjectMixin
 
+from articleapp.models import Article
 from .decorators import account_ownership_required
 from .models import *
 
@@ -48,10 +50,15 @@ class AccountCreateView(CreateView):
     template_name = 'accountapp/create.html'
 
 # CRUD 중 R(DetailView)를 이용해 개인페이지 구현
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(object_list=object_list
+                                                               ,**kwargs)
 
 # CRUD 중 U(Update View) 를 이용해 비밀번호 변경 구현
 @method_decorator(has_ownership, 'get')
