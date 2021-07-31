@@ -38,6 +38,7 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
 
         if user.is_authenticated:
             subscription = Subscription.objects.filter(user=user,project=project)
+
         # multiple Mixin
         object_list = Article.objects.filter(project=self.get_object())
         return super(ProjectDetailView, self).get_context_data(object_list=object_list,
@@ -49,3 +50,4 @@ class ProjectListView(ListView):
     context_object_name = 'project_list'
     template_name = 'projectapp/list.html'
     paginate_by = 15
+

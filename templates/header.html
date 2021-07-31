@@ -5,7 +5,7 @@
     <div style="font-size: 1.2rem; font-family: 'Single Day', cursive;"
          class="pragmatic_header_nav_bar">
         <a href="{% url 'article:list' %}">
-            <span>Article</span>
+            <span>메인</span>
         </a>
         <a href="{% url 'board:list' %}" class="pragmatic_header_nav">
         <span>프로젝트</span>
@@ -21,10 +21,15 @@
             <span>회원가입</span>
         </a>
         {% else %}
+        <a href="{% url 'subscribe:list' %}" class="pragmatic_header_nav">
+            <span>나의구독</span>
+        </a>
+
         <a href="{% url 'accountapp:detail' pk=user.pk %}"
            class="pragmatic_header_nav">
             <span>MyPage</span>
         </a>
+
         <a href="{% url 'accountapp:logout' %}?next={{request.path}}"
            class="pragmatic_header_nav">
             <span>로그아웃</span>
