@@ -10,6 +10,7 @@ from django.views.generic.list import MultipleObjectMixin
 from articleapp.models import Article
 from boardapp.forms import ProjectCreationForm
 from boardapp.models import Project
+from subscribeapp.models import Subscription
 
 
 @method_decorator(login_required,'get')
@@ -30,8 +31,17 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
+        # subscription을 context로 넘겨줘서
+        # board의 detail.html 에서 구독정보가 있는지없는지 확인할 수 있음
+        project = self.object
+        user = self.request.user
+
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user,project=project)
+        # multiple Mixin
         object_list = Article.objects.filter(project=self.get_object())
         return super(ProjectDetailView, self).get_context_data(object_list=object_list,
+                                                               subscription=subscription,
                                                                **kwargs)
 
 class ProjectListView(ListView):
