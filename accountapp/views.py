@@ -12,27 +12,6 @@ from .models import *
 # Create your views here.
 # accountapp 은 회원가입 로그인 회원탈퇴 로그아웃 비밀번호변경 기본페이지(hello_world)
 
-@login_required
-def hello_world(request):
-
-    if request.method == 'POST':
-        temp = request.POST.get('hello_world_input')
-
-        new = helloworld()
-        new.text = temp
-        new.save()
-
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
-
-    else:
-        # helloword 의 모든 데이터를 긁어올 수 있음
-        hello_world_list = helloworld.objects.all()
-
-        return render(request, 'accountapp/helloWorld.html', context=
-        {'hello_world_list':hello_world_list})
-
-
-
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -46,7 +25,7 @@ has_ownership = [account_ownership_required, login_required]
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('article:list')
     template_name = 'accountapp/create.html'
 
 # CRUD 중 R(DetailView)를 이용해 개인페이지 구현
@@ -67,8 +46,8 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = 'target_user'
     form_class = AccountUserUpdateForm
-    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
+    success_url = reverse_lazy('home')
 
 # CRUD 중 D(DelteView) 를 이용해 회원탈퇴 구현
 @method_decorator(has_ownership, 'get')

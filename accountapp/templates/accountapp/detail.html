@@ -2,20 +2,23 @@
 
 {% block content %}
   <div>
-    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+    <div style="text-align: center; max-width: 500px; margin: 2rem auto;">
 
       <!--포로파일이 있다면 이미지,닉네임,메시지,편집보아게-->
       {% if target_user.profile %}
-      <img src="{{ target_user.profile.image.url }}" alt=""
+        {% if target_user.profile.image %}
+          <img src="{{ target_user.profile.image.url }}" alt=""
            style="height: 10rem; width: 10rem; border-radius: 20rem; margin-bottom: 2rem;
            object-fit: cover;">
-
+        {% endif %}
       <h2 style="font-family: NanumSquareB;">
         {{ target_user.profile.nickname }}
-
+        <!-- 프로필 편집(이미지,닉네임,메시지)-->
         {% if target_user == user %}
-        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-          편집
+        <a class="material-icons"
+           style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
+           href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+          edit
         </a>
         {% endif %}
       </h2>
@@ -38,24 +41,23 @@
         {% endif %}
       {% endif %}
 
-
       <!-- 비밀번호 변경(update)-->
       {% if target_user == user %}
-      <a href="{% url 'accountapp:update' pk=target_user.pk %}">
-        <p>
-          비밀번호 변경
-        </p>
+      <a class="material-icons"
+         style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .1rem;"
+         href="{% url 'accountapp:update' pk=target_user.pk %}">
+          settings
       </a>
       <!-- 회원탈퇴(delete) -->
-      <a href="{% url 'accountapp:delete' pk=target_user.pk %}">
-        <p>
-          회원탈퇴
-        </p>
+      <a class="material-icons"
+         style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .4rem;"
+         href="{% url 'accountapp:delete' pk=target_user.pk %}">
+          cancel
       </a>
       {% endif %}
 
     </div>
-
+<hr>
     <div>
       {% include 'snippets/list_fragment.html' with article_list=object_list%}
     </div>

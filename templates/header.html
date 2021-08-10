@@ -1,6 +1,8 @@
 <div class="pragmatic_header">
     <div class="pragmatic_logo">
-        <h1>Pragmatic</h1>
+        <a href="{% url 'home' %}">
+            <h1>Pragmatic</h1>
+        </a>
     </div>
     <div style="font-size: 1.2rem; font-family: 'Single Day', cursive;"
          class="pragmatic_header_nav_bar">
@@ -30,7 +32,7 @@
             <span>MyPage</span>
         </a>
 
-        <a href="{% url 'accountapp:logout' %}?next={{request.path}}"
+        <a href="{% url 'accountapp:logout' %}"
            class="pragmatic_header_nav">
             <span>로그아웃</span>
         </a>

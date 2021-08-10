@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
@@ -60,8 +61,10 @@ class ArticleDeleteView(DeleteView):
     template_name = 'articleapp/delete.html'
     success_url = reverse_lazy('article:list')
 
+
 class ArticleListView(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
-    paginate_by = 10
+    ordering = ('-id')
+    paginate_by = 25
