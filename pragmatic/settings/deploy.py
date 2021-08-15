@@ -28,7 +28,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'django_1',
         'PASSWORD': 'password123',
-        'HOST': 'maria_db',
+        'HOST': 'mariadb',
         'PORT': '3306',
     }
 }
