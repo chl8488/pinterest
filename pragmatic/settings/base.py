@@ -15,9 +15,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
 import os,environ
+from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 
 # Application definition
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'commentapp',
     'boardapp',
     'subscribeapp',
+    'Likeapp',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 ROOT_URLCONF = 'pragmatic.urls'
 
@@ -130,3 +135,4 @@ MEDIA_URL = '/media/'
 # 미디어 파일을 서버에 올렸을때 어느경로에 지정이 될것인가에 대한 정보
 # 파일을 올리게 되면 pinterest 아래에 media 라는 디렉토리가 새로 생기면서 이디렉토리안에 있는 디렉토리에 우리가 올린 파일들이 저장됨
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

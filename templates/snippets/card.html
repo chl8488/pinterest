@@ -6,6 +6,14 @@
     <h5 class="mt-2" style="font-family: 'NanumSquareB'">
       {{ article.title | truncatechars:8 }}
     </h5>
+    {% if  article.like > 0 %}
+    <i class="material-icons" style="color: #ff6363; vertical-align: middle; font-size: .8rem">
+            favorite
+    </i>
+    <span style= "vertical-align: middle; font-size: .8rem">
+          {{article.like}}
+    </span>
+    {% endif %}
   </div>
 {% else %}
   <div style="display: block; text-align: center; box-shadow: #ccc 0 0 2rem;
@@ -13,5 +21,13 @@
     <h5 class="mt-2" style="font-family: 'NanumSquareB';">
       {{ article.title | truncatechars:8 }}
     </h5>
+    {% if  article.like > 0 %}
+    <i class="material-icons" style="color: #ff6363; vertical-align: middle; font-size: .8rem">
+            favorite
+    </i>
+    <span style= "vertical-align: middle; font-size: .8rem">
+          {{article.like}}
+    </span>
+    {% endif %}
   </div>
 {% endif %}

@@ -28,6 +28,7 @@ class AccountCreateView(CreateView):
     success_url = reverse_lazy('article:list')
     template_name = 'accountapp/create.html'
 
+
 # CRUD 중 R(DetailView)를 이용해 개인페이지 구현
 class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User

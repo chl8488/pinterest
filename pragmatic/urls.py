@@ -30,4 +30,5 @@ urlpatterns = [
     path('comments/',include('commentapp.urls')),
     path('boards/',include('boardapp.urls')),
     path('subscribe/',include('subscribeapp.urls')),
+    path('likes/',include('Likeapp.urls', namespace='Likeapp')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

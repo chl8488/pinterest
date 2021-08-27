@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 
 # Create your views here.
@@ -21,6 +22,7 @@ class ProfileCreateView(CreateView):
         temp_profile = form.save(commit=False)
         temp_profile.user = self.request.user
         temp_profile.save()
+        messages.add_message(self.request,messages.SUCCESS,'프로필이 생성되었습니다.')
 
         return super().form_valid(form)
 
@@ -36,4 +38,5 @@ class ProfileUpdateView(UpdateView):
     template_name = 'ProfileApp/update.html'
 
     def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, '프로필이 변경되었습니다.')
         return reverse('accountapp:detail',kwargs={'pk':self.object.user.pk})

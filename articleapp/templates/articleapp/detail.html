@@ -8,9 +8,32 @@
         {{ target_article.title }}
       </h1>
 
-      <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
-        <p class="text-info"> {{ target_article.writer.profile.nickname }}</p>
-      </a>
+       <!-- 좋아요 -->
+      <div style="height:2rem; margin-bottom: 1.2rem">
+        <a href="{% url 'Likeapp:article_like' pk=target_article.pk %}">
+          <i class="material-icons" style="color: #ff6363; vertical-align: middle; font-size: 1.2rem">
+            favorite
+          </i>
+         </a>
+        <span style= "vertical-align: middle; font-size: 1.2rem">
+          {{target_article.like}}
+        </span>
+      </div>
+        <!--좋아요 시스템 끝-->
+
+      <div style="text-align: center; box-shadow: #d4d4d4 0px 0px 5px; border-radius: 10rem;
+            display: inline-block;">
+        <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
+          {% if target_article.writer.profile.image %}
+            <img src="{{ target_article.writer.profile.image.url }}" alt=""
+             style="height: 2rem; width: 2rem; border-radius: 10rem; margin:.3rem -0.3rem .3rem .3rem;
+             object-fit: cover;">
+          {% endif %}
+          <p style="text-align: center; vertical-align: middle; display: inline-block;
+            font-family: 'NanumSquareB', sans-serif; font-size: 1.1rem;
+             margin: 0.3rem 0.6rem 0.3rem 0.6rem;"> {{ target_article.writer.profile.nickname }}</p>
+        </a>
+      </div>
       <hr>
 
       {% if target_article.image %}
