@@ -1,5 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
@@ -10,6 +12,20 @@ from django.views.generic import RedirectView
 
 from articleapp.models import Article
 from Likeapp.models import LikeRecord
+
+@transaction.atomic
+def db_transaction(user, article):
+    article.like += 1
+    article.save()
+
+    if LikeRecord.objects.filter(user=user, article=article).exists():
+        raise ValidationError('Like already exists')
+        # return HttpResponseRedirect(
+        #     reverse('article:detail', kwargs={'pk': article.pk})
+        # )
+    else:
+        LikeRecord(user=user, article=article).save()
+
 
 
 @method_decorator(login_required,'get')
@@ -23,14 +39,15 @@ class LikeArticleView(RedirectView):
         article = get_object_or_404(Article, pk=kwargs['pk'])
         user = self.request.user
 
-        if LikeRecord.objects.filter(user=user, article=article).exists():
+        try:
+            db_transaction(user, article)
+            messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.')
+        except ValidationError:
             messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다!')
             return HttpResponseRedirect(
                 reverse('article:detail', kwargs={'pk': kwargs['pk']})
             )
-        else:
-            LikeRecord(user=user,article=article).save()
-            article.like += 1
-            article.save()
-            messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.')
+
         return super(LikeArticleView, self).get(self.request, *args, **kwargs)
+
+

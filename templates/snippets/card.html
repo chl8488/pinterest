@@ -14,7 +14,17 @@
           {{article.like}}
     </span>
     {% endif %}
+    {% if  article.comment.count > 0 %}
+    <i class="material-icons" style="vertical-align: middle; font-size: .8rem">
+            comment
+    </i>
+    <span style= "vertical-align: middle; font-size: .8rem">
+          {{article.comment.count}}
+    </span>
+    {% endif %}
   </div>
+
+
 {% else %}
   <div style="display: block; text-align: center; box-shadow: #ccc 0 0 2rem;
    margin: .3rem 0.1rem; " >
@@ -29,5 +39,16 @@
           {{article.like}}
     </span>
     {% endif %}
+    {% if  article.comment.count > 0 %}
+    <i class="material-icons" style="vertical-align: middle; font-size: .8rem">
+            comment
+    </i>
+    <span style= "vertical-align: middle; font-size: .8rem">
+          {{article.comment.count}}
+    </span>
+    {% endif %}
   </div>
+
+
+
 {% endif %}

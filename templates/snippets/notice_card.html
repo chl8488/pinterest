@@ -1,0 +1,18 @@
+<p style="display: inline-block; font-size: 1rem; font-family: 'NanumSquareR'; overflow: hidden;
+max-height: 2.15rem; margin: 0; line-height: normal; margin-top: .2rem">
+    {{notice.title | truncatechars:25}}
+</p>
+<div>
+{% if  notice.like > 0 %}
+    <i class="material-icons" style="color: #ff6363; vertical-align: middle; font-size: .8rem">
+        favorite
+    </i>
+    <span style= "vertical-align: middle; font-size: .8rem">
+        {{notice.like}}
+    </span>
+{% endif %}
+    <p style="margin-bottom: 0; display: inline; font-size: .7rem; margin-left: 2rem; font-family: 'NanumSquareB'">
+        {{notice.writer.profile.nicname}}
+
+    </p>
+</div>

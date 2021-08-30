@@ -13,3 +13,6 @@ class Comment(models.Model):
     image = models.ImageField(upload_to='comments/',null=True,blank=True)
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']

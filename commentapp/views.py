@@ -11,6 +11,7 @@ from commentapp.form import CommentCreationForm
 from commentapp.models import Comment
 
 
+
 class CommentCreateView(CreateView):
     model = Comment
     form_class = CommentCreationForm
